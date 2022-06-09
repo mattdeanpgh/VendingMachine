@@ -1,6 +1,6 @@
 package com.techelevator;
 
-import com.techelevator.products.Products;
+import com.techelevator.products.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,22 +27,42 @@ public class Machine {
                             Double productCost = Double.parseDouble(productDetails[2]);
                             String productType = productDetails[3];
 
-                            Products newProduct = new Products(productLocation, productName, productCost, productType ); {
-                                newProduct.setName(productName);
-                                itemsInMachine.add(newProduct);
+                            if (productType.equals("Drink")) {
+                            Beverage newBeverage = new Beverage(productLocation, productName, productCost, productType);
+                            {
+                                itemsInMachine.add(newBeverage);
+                            }
                         }
+                                else if (productType.equals("Chip")) {
+
+                                    Chips newChip = new Chips(productLocation, productName, productCost, productType ); {
+                                        itemsInMachine.add(newChip);
+                                    }
                         }
-                    }
+                                else if (productType.equals("Candy")) {
+                                    Candy newCandy = new Candy(productLocation, productName, productCost, productType); {
+                                        itemsInMachine.add(newCandy);
+                                    }
+                                }
+                                else if (productType.equals("Gum")) {
+                                    Gum newGum = new Gum(productLocation, productName, productCost, productType); {
+                                        newGum.setName(productName);
+                                        itemsInMachine.add(newGum);
+                                    }
+                                }
+                            }
+                        }
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        for (Products prod : itemsInMachine) {
 
-            System.out.println(prod.getName() + " " + prod.getPrice() + " " + prod.getProductType());
+        for (Products prod : itemsInMachine) {
+        System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + prod.getPrice() + " | " + prod.getProductType()); //need to have quantity remaining
+        }
 
         }
 
     }
-}
+
