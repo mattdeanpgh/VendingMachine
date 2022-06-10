@@ -10,11 +10,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Machine {
-    public static void main(String[] args) {
+    private List<Products> itemsInMachine;
+
+    public List<Products> getItemsInMachine() {return itemsInMachine;}
+    public void setItemsInMachine(List<Products> itemsInMachine) {this.itemsInMachine = itemsInMachine;}
+
+    public Machine() {
 
         List<Products> itemsInMachine = new ArrayList<>();
 
         File inventory = new File("vendingmachine.csv");
+        
 
         {
             try (Scanner fileInput = new Scanner(inventory)) {
