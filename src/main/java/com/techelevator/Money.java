@@ -29,42 +29,45 @@ public class Money extends Machine {
     }
 
 
-    public double getFeedMoney(double moneyInserted) { 
+    public double getFeedMoney(double moneyInserted) {
         if (moneyInserted <= 0 || moneyInserted >= 10) {
             System.out.println("Invalid amount. Return to main menu.");
         } else {
-        currentMoney = currentMoney + moneyInserted;
-        return currentMoney;
+            currentMoney = currentMoney + moneyInserted;
+
+        } return currentMoney;
+    }
+        public double withdraw (double priceOfProduct){
+            currentMoney = currentMoney - priceOfProduct;
+            return currentMoney;
+        }
+
+        public void makePurchaseReturnChange () {
+            int quarterCounter = 0;
+            int dimeCounter = 0;
+            int nickelCounter = 0;
+            int quartersFromTruncation = (int) (currentMoney / .25);
+            int dimesFromTruncation = (int) (((currentMoney * 100) - (quartersFromTruncation * 25)) / 10);
+
+            if (currentMoney >= .25) {
+                quarterCounter += currentMoney / .25;
+            }
+            if (currentMoney >= .10) {
+                currentMoney = currentMoney - ((quartersFromTruncation * 25) / 100);
+                dimeCounter += currentMoney / .1;
+            }
+            if (currentMoney >= .05) {
+                currentMoney = currentMoney - ((((quartersFromTruncation * 25) + (dimesFromTruncation * 10)) / 100));
+                nickelCounter += currentMoney / .05;
+            }
+            System.out.println("Change due is " + currentMoney + "(" + quarterCounter + " quarters, " + dimeCounter + " dimes, " + nickelCounter + " nickels)");
+        }
     }
 
-    public double withdraw(double priceOfProduct) {
-        currentMoney = currentMoney - priceOfProduct;
-        return currentMoney;
-    }
-
-    public void makePurchaseReturnChange() {
-        int quarterCounter = 0;
-        int dimeCounter = 0;
-        int nickelCounter = 0;
-        int quartersFromTruncation = (int) (currentMoney / .25);
-        int dimesFromTruncation = (int) (((currentMoney * 100) - (quartersFromTruncation * 25)) / 10);
-
-        if (currentMoney >= .25) {
-            quarterCounter += currentMoney / .25;
-        }
-        if (currentMoney >= .10) {
-            currentMoney = currentMoney - ((quartersFromTruncation * 25) / 100);
-            dimeCounter += currentMoney / .1;
-        }
-        if (currentMoney >= .05) {
-            currentMoney = currentMoney - ((((quartersFromTruncation * 25) + (dimesFromTruncation * 10)) / 100));
-            nickelCounter += currentMoney / .05;
-        }
-        System.out.println("Change due is " + currentMoney + "(" + quarterCounter + " quarters, " + dimeCounter + " dimes, " + nickelCounter + " nickels)");
-    }
 
 
-}
+
+
 
 //inventory reduction: inventory count needs to go down by 1 each time that item is purchased
 //if item inventory == 0 sout "SOLD OUT" and return to previous menu
