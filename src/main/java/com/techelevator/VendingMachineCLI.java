@@ -1,6 +1,12 @@
 package com.techelevator;
 
+import com.techelevator.*;
+import com.techelevator.products.Products;
 import com.techelevator.view.Menu;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VendingMachineCLI {
 
@@ -20,7 +26,26 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			switch (choice) {
-				case MAIN_MENU_OPTION_DISPLAY_ITEMS:
+				case MAIN_MENU_OPTION_DISPLAY_ITEMS: {
+
+					Machine itemsPresent = new Machine();
+
+					List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
+
+
+						 for (Products prod : listOfInventory) {
+							NumberFormat formatter = NumberFormat.getCurrencyInstance();
+							String moneyString = formatter.format(prod.getPrice());
+							System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
+
+							 System.out.println("Press enter to return to the main menu.");
+								 return choice;
+
+							 }
+
+					}
+
+				}
 					break;
 				case MAIN_MENU_OPTION_PURCHASE:
 					break;
