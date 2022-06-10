@@ -20,7 +20,7 @@ public class Machine {
         List<Products> itemsInMachine = new ArrayList<>();
 
         File inventory = new File("vendingmachine.csv");
-        
+
 
         {
             try (Scanner fileInput = new Scanner(inventory)) {
