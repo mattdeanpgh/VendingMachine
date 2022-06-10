@@ -66,12 +66,12 @@ public class Machine {
         }
 
 
-        for (Products prod : itemsInMachine) {
-            NumberFormat formatter = NumberFormat.getCurrencyInstance();
-            String moneyString = formatter.format(prod.getPrice());
-            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
-           //need to have quantity remaining
-        }
+//        for (Products prod : itemsInMachine) {
+//            NumberFormat formatter = NumberFormat.getCurrencyInstance();
+//            String moneyString = formatter.format(prod.getPrice());
+//            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
+//           //need to have quantity remaining
+//        }
 //
     }
 
