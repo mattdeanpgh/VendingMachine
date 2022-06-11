@@ -5,6 +5,6 @@ public class Chips extends Products{
         super(slotNumber, name, price, productType, inventoryCount);
     }
     public String boughtIt() {
-       return  "Crunch Crunch, Yum!";
+       return "Crunch Crunch, Yum!";
     }
 }

@@ -10,6 +10,7 @@ import java.io.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class VendingMachineCLI {
@@ -113,6 +114,9 @@ public class VendingMachineCLI {
                                 case SUB_MENU_SELECT_PRODUCT: {
 //                                    boolean stayInMenu = true;
                                     System.out.println();
+                                    System.out.print("Your current balance is: " + balanceMoney);
+                                    System.out.println();
+                                    System.out.println();
                                     Machine itemsPresent = new Machine();
                                     List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
                                     for (Products prod : listOfInventory) {
@@ -120,13 +124,22 @@ public class VendingMachineCLI {
                                         String moneyString = format.format(prod.getPrice());
                                         System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | " + prod.getInventoryCount() + " remaining.");
                                     }
+
                                     System.out.println();
                                     System.out.print("Please enter the product code: ");
                                     String choiceInput = scanner.nextLine();
                                     for (Products prod : listOfInventory) {
-                                        if (prod.getSlotNumber().toUpperCase().contains(choiceInput.toUpperCase())) {
-
-                                        }
+                                    if (choiceInput.equals(prod.getSlotNumber())) {
+                                        System.out.println("The product you selected is: " + prod.getName() );
+                                    }
+//                                        String productPrice = format.format(prod.getPrice());
+//                                        String productChoice = prod.getSlotNumber().toUpperCase().contains(choiceInput.toUpperCase();
+//                                        Double productCost = Double.parseDouble(choiceInput);
+////                                        if (prod.getSlotNumber().toUpperCase().contains(choiceInput.toUpperCase()))
+//                                                double priceOfProduct = Double.parseDouble(choiceInput).getPrice();
+//                                            balanceMoney = balanceMoney -priceOfProduct;
+                                        
+                                       
 //                                            balanceMoney = current.getFeedMoney() - prod.getPrice();
 //                                        displayCurrent =
 //
