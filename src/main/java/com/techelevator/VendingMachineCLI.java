@@ -6,8 +6,7 @@ import com.techelevator.products.Products;
 import com.techelevator.view.Menu;
 
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class VendingMachineCLI {
                         for (Products prod : itemsPresent.getItemsInMachine()) {
                             NumberFormat formatter = NumberFormat.getCurrencyInstance();
                             String moneyString = formatter.format(prod.getPrice());
-                            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | "+ prod.getInventoryCount() + " remaining.");
+                            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | " + prod.getInventoryCount() + " remaining.");
 
 //                                menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
@@ -65,6 +64,9 @@ public class VendingMachineCLI {
 
 
                     try {
+                        File log = new File("Log.txt");
+                        Date dateFormatted = new Date();
+
 
                         boolean x = true;
                         while (x) {
@@ -89,9 +91,22 @@ public class VendingMachineCLI {
                                     double moneyInMachine = moneyInserted.getFeedMoney();
                                     displayCurrent += moneyInMachine;
 
+                                    if (moneyPutIn > 0) {
+
+
+                                        try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
+                                            writer.println("Date " + "Time" + " FEED MONEY " + moneyPutIn + " " + displayCurrent);
+
+
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("File Not Found");
+
 //                                    System.out.println("Your current balance is " + displayCurrent);
 
 //                                    menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
+
+                                        }
+                                    }
                                 }
                                 break;
 
@@ -103,7 +118,7 @@ public class VendingMachineCLI {
                                     for (Products prod : listOfInventory) {
                                         NumberFormat format = NumberFormat.getCurrencyInstance();
                                         String moneyString = format.format(prod.getPrice());
-                                        System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | "+ prod.getInventoryCount() + " remaining.");
+                                        System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | " + prod.getInventoryCount() + " remaining.");
                                     }
                                     System.out.println();
                                     System.out.print("Please enter the product code: ");
@@ -135,11 +150,13 @@ public class VendingMachineCLI {
 
 
                                 case SUB_MENU_FINISH_TRANSACTION: {
+
                                     //Write transaction to file
+                                    x = false;
                                 }
+
                             }
                         }
-                        x = false;
 
 
                         break;
@@ -149,8 +166,7 @@ public class VendingMachineCLI {
 //                                    throw new IllegalStateException("Unexpected value: " + purchaseChoice);
 
 
-
-                    }catch (NullPointerException e) {
+                    } catch (NullPointerException e) {
                         System.out.println("Not a Valid Choice.");
                     }
 
@@ -160,11 +176,8 @@ public class VendingMachineCLI {
             }
 
         }
-    }}
-
-
-
-
+    }
+}
 
 
 //create a new instance of machine

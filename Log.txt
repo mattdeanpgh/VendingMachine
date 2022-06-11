@@ -1,0 +1,6 @@
+Date Time FEED MONEY 9.0 18.0
+Date Time FEED MONEY 5.0 5.0
+Date Time FEED MONEY 5.0 10.0
+Date Time FEED MONEY 5.0 15.0
+Date Time FEED MONEY 5.0 20.0
+Date Time FEED MONEY 10.0 30.0
