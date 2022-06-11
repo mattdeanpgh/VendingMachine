@@ -9,12 +9,17 @@ import java.util.*;
 public class Money {
     private double currentMoney = 0;
     private double feedMoney;
+    private double withdraw;
 
 
     public Money(double currentMoney, double feedMoney) {
         this.feedMoney = feedMoney;
         this.currentMoney = currentMoney;
 
+
+    }
+    public Money(double withdraw) {
+        this.withdraw = withdraw;
     }
 
     public Money() {
@@ -29,6 +34,9 @@ public class Money {
         return currentMoney;
     }
 
+    public double getWithdraw() {
+        return withdraw;
+    }
 
     public double getFeedMoney() {
         return feedMoney;
@@ -40,12 +48,10 @@ public class Money {
         } else {
             currentMoney = currentMoney + moneyInserted;
 
-//        } return currentMoney;
         }
     }
-        public double withdraw ( double priceOfProduct){
+        public void withdraw ( double priceOfProduct){
             currentMoney = currentMoney - priceOfProduct;
-            return currentMoney;
         }
 
         public void makePurchaseReturnChange () {

@@ -17,7 +17,9 @@ public class Products {
         this.inventoryCount = inventoryCount;
     }
 
-
+public String boughtIt(){
+       return boughtIt();
+}
     public int getInventoryCount() {
         return inventoryCount;
     }

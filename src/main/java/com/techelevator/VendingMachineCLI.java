@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.*;
+import com.techelevator.products.Chips;
 import com.techelevator.products.Products;
 import com.techelevator.view.Menu;
 
@@ -40,7 +41,7 @@ public class VendingMachineCLI {
                 case MAIN_MENU_OPTION_DISPLAY_ITEMS:
 
                     try {
-
+                        System.out.println();
                         Machine itemsPresent = new Machine();
 
                         for (Products prod : itemsPresent.getItemsInMachine()) {
@@ -69,17 +70,18 @@ public class VendingMachineCLI {
                         while (x) {
 
                             NumberFormat formatter = NumberFormat.getCurrencyInstance();
-                            String moneyString = formatter.format(displayCurrent);
+                            String balanceMoney = formatter.format(displayCurrent);
 
                             System.out.println();
-                            System.out.print("Your current balance is: " + moneyString);
+                            System.out.print("Your current balance is: " + balanceMoney);
+                            System.out.println();
                             String purchaseChoice = (String) menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
 
 
                             switch (purchaseChoice) {
 
                                 case SUB_MENU_OPTION_FEED_MONEY: {
-
+                                    System.out.println();
                                     System.out.print("Please add your money by entering in values of $1, $2, $5, or $10: ");
                                     String userInput = scanner.nextLine();
                                     double moneyPutIn = Double.parseDouble(userInput);
@@ -87,59 +89,68 @@ public class VendingMachineCLI {
                                     double moneyInMachine = moneyInserted.getFeedMoney();
                                     displayCurrent += moneyInMachine;
 
-                                    System.out.println("Your current balance is " + displayCurrent);
+//                                    System.out.println("Your current balance is " + displayCurrent);
 
-                                    menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
+//                                    menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
                                 }
                                 break;
 
                                 case SUB_MENU_SELECT_PRODUCT: {
-                                    boolean stayInMenu = true;
-
+//                                    boolean stayInMenu = true;
+                                    System.out.println();
                                     Machine itemsPresent = new Machine();
                                     List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
                                     for (Products prod : listOfInventory) {
-                                        System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
+                                        NumberFormat format = NumberFormat.getCurrencyInstance();
+                                        String moneyString = format.format(prod.getPrice());
+                                        System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | "+ prod.getInventoryCount() + " remaining.");
                                     }
-                                    while (stayInMenu) {
-                                        System.out.println("Please enter the product code: ");
-                                        String choiceInput = scanner.nextLine();
-                                        for (Products prod : listOfInventory) {
-                                            if (prod.getSlotNumber().toUpperCase().equals(choiceInput)) {
-                                                String productChoice = prod.getSlotNumber();
-                                                double productCost = Double.parseDouble(moneyString);
+                                    System.out.println();
+                                    System.out.print("Please enter the product code: ");
+                                    String choiceInput = scanner.nextLine();
+                                    for (Products prod : listOfInventory) {
+                                        if (prod.getSlotNumber().toUpperCase().contains(choiceInput.toUpperCase())) {
 
-                                            }
-                                            if (prod.getProductType().equals("Chip")) ;
-                                            System.out.println("Crunch Crunch, Yum!" + " Enjoy!");
-                                            if (prod.getProductType().equals("Drink")) ;
-                                            System.out.println("Glug Glug, Yum!" + " Enjoy!");
-                                            if (prod.getProductType().equals("Candy")) ;
-                                            System.out.println(prod.getProductType().equals("Candy"));
-                                            System.out.println("Munch Munch, Yum!" + " Enjoy!");
                                         }
-
-                                        stayInMenu = false;
+//                                            balanceMoney = current.getFeedMoney() - prod.getPrice();
+//                                        displayCurrent =
+//
+//                                        if (prod.getProductType().equals("Chip")) ;
+//                                        System.out.println(Chips.bought);
+//                                        if (prod.getProductType().equals("Drink")) ;
+//                                        System.out.println("Glug Glug, Yum!" + " Enjoy!");
+//                                        if (prod.getProductType().equals("Candy")) ;
+//                                        System.out.println(prod.getProductType().equals("Candy"));
+//                                        System.out.println("Munch Munch, Yum!" + " Enjoy!");
                                     }
+//                                    while (stayInMenu) {
+//                                        String userInput = scanner.nextLine();
+//                                        double moneySpent =
+//                                    }
                                 }
+//                                        stayInMenu = false; I think the boolean statement at the top of the try block will apply to all of these menus so this probably isn't needed
+//                                menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
                                 break;
 
 
                                 case SUB_MENU_FINISH_TRANSACTION: {
                                     //Write transaction to file
-                                    x = false;
-
                                 }
-                                break;
-
-
                             }
                         }
+                        x = false;
 
 
                         break;
-                    } catch (NullPointerException e) {
+
+
+//                                default:
+//                                    throw new IllegalStateException("Unexpected value: " + purchaseChoice);
+
+
+
+                    }catch (NullPointerException e) {
                         System.out.println("Not a Valid Choice.");
                     }
 
@@ -149,8 +160,8 @@ public class VendingMachineCLI {
             }
 
         }
-    }
-}
+    }}
+
 
 
 
