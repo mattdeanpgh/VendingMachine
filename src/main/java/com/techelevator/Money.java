@@ -11,7 +11,7 @@ public class Money extends Machine {
 
 
     public Money(double currentMoney, double feedMoney) {
-        this.feedMoney = currentMoney;
+        this.feedMoney = feedMoney;
         this.currentMoney = currentMoney;
 
     }
@@ -29,15 +29,20 @@ public class Money extends Machine {
     }
 
 
-    public double getFeedMoney(double moneyInserted) {
+    public double getFeedMoney() {
+        return feedMoney;
+    }
+
+    public void FeedMoney(double moneyInserted) {
         if (moneyInserted <= 0 || moneyInserted >= 10) {
             System.out.println("Invalid amount. Return to main menu.");
         } else {
             currentMoney = currentMoney + moneyInserted;
 
-        } return currentMoney;
+//        } return currentMoney;
+        }
     }
-        public double withdraw (double priceOfProduct){
+        public double withdraw ( double priceOfProduct){
             currentMoney = currentMoney - priceOfProduct;
             return currentMoney;
         }
@@ -63,6 +68,7 @@ public class Money extends Machine {
             System.out.println("Change due is " + currentMoney + "(" + quarterCounter + " quarters, " + dimeCounter + " dimes, " + nickelCounter + " nickels)");
         }
     }
+
 
 
 
