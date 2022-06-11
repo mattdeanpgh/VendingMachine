@@ -5,7 +5,8 @@ import com.techelevator.products.Products;
 import java.io.*;
 import java.util.*;
 
-public class Money extends Machine {
+
+public class Money {
     private double currentMoney = 0;
     private double feedMoney;
 

@@ -7,20 +7,24 @@ public class Products {
     private String productType;
     private double price;
 
-//    public Products(String name, String slotNumber, int inventoryCount, String productType, double price) {
-//        this.name = name;
-//        this.slotNumber = slotNumber;
-//        this.inventoryCount = inventoryCount;
-//        this.productType = productType;
-//        this.price = price;
-//    }
+//, int inventoryCount
+
     public Products(String slotNumber, String name, double price, String productType) {
         this.slotNumber = slotNumber;
         this.name = name;
         this.price = price;
         this.productType = productType;
+//        this.inventoryCount = inventoryCount
     }
 
+
+    public int getInventoryCount() {
+        return inventoryCount;
+    }
+
+    public void setInventoryCount(int inventoryCount) {
+        this.inventoryCount = inventoryCount;
+    }
 
     public String getName() {
         return name;
@@ -36,14 +40,6 @@ public class Products {
 
     public void setSlotNumber(String slotNumber) {
         this.slotNumber = slotNumber;
-    }
-
-    public int getInventoryCount() {
-        return inventoryCount;
-    }
-
-    public void setInventoryCount(int inventoryCount) {
-        this.inventoryCount = inventoryCount;
     }
 
     public String getProductType() {

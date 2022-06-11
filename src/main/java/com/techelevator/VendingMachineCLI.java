@@ -59,7 +59,7 @@ public class VendingMachineCLI {
                     }
 
 
-                break;
+                    break;
 
                 case MAIN_MENU_OPTION_PURCHASE:
                     try {
@@ -76,13 +76,39 @@ public class VendingMachineCLI {
                         switch (purchaseChoice) {
                             case SUB_MENU_OPTION_FEED_MONEY: {
                                 System.out.println("Please add your money by entering in values of $1, $2, $5, or $10:");
-                                 String userInput = scanner.nextLine();
-                                 double moneyPutIn = Double.parseDouble(userInput);
+                                String userInput = scanner.nextLine();
+                                double moneyPutIn = Double.parseDouble(userInput);
 
                             }
                             break;
 
                             case SUB_MENU_SELECT_PRODUCT: {
+                                boolean stayInMenu = true;
+
+                                Machine itemsPresent = new Machine();
+                                List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
+                                for (Products prod : listOfInventory) {
+                                    System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
+                                }
+                                while (stayInMenu) {
+                                    System.out.println("Please enter the product code: ");
+                                    String choiceInput = scanner.nextLine();
+                                    for (Products prod : listOfInventory) {
+                                        if (prod.getSlotNumber().toUpperCase().equals(choiceInput)) {
+                                            String productChoice = prod.getSlotNumber();
+                                            double productCost = Double.parseDouble(moneyString);
+
+                                        }
+                                        if (prod.getProductType().equals("Chip"));
+                                            System.out.println("Crunch Crunch, Yum!" + " Enjoy!");
+                                        if (prod.getProductType().equals("Drink"));
+                                        System.out.println("Glug Glug, Yum!" + " Enjoy!");
+                                        if (prod.getProductType().equals("Candy"));
+                                        System.out.println(prod.getProductType().equals("Candy"));
+                                        System.out.println("Munch Munch, Yum!" + " Enjoy!");
+                                    }
+                                }
+                                stayInMenu = false;
                             }
                             break;
 
@@ -91,13 +117,12 @@ public class VendingMachineCLI {
                             }
                             break;
                         }
-                        } catch (NullPointerException e) {
+                    } catch (NullPointerException e) {
                         System.out.println("Not a Valid Choice.");
                     }
 
 
-
-                break;
+                    break;
 
                 case MAIN_MENU_OPTION_EXIT:
                     System.exit(0);
@@ -108,3 +133,5 @@ public class VendingMachineCLI {
 }
 
 
+//create a new instance of machine
+//having items present, you can get those items from that class
