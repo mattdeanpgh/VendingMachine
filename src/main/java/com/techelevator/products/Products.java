@@ -9,12 +9,12 @@ public class Products {
 
 //, int inventoryCount
 
-    public Products(String slotNumber, String name, double price, String productType) {
+    public Products(String slotNumber, String name, double price, String productType, int inventoryCount) {
         this.slotNumber = slotNumber;
         this.name = name;
         this.price = price;
         this.productType = productType;
-//        this.inventoryCount = inventoryCount
+        this.inventoryCount = inventoryCount;
     }
 
 

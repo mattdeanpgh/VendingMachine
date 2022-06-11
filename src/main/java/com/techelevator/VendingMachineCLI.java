@@ -46,7 +46,7 @@ public class VendingMachineCLI {
                         for (Products prod : itemsPresent.getItemsInMachine()) {
                             NumberFormat formatter = NumberFormat.getCurrencyInstance();
                             String moneyString = formatter.format(prod.getPrice());
-                            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
+                            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | "+ prod.getInventoryCount() + " remaining.");
 
 //                                menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
