@@ -87,9 +87,11 @@ public class VendingMachineCLI {
                                     double moneyPutIn = Double.parseDouble(userInput);
                                     Money moneyInserted = new Money(displayCurrent, moneyPutIn);
                                     double moneyInMachine = moneyInserted.getFeedMoney();
+//                                    moneyInserted.moneyInsert();
                                     displayCurrent += moneyInMachine;
 
-                                    if (moneyPutIn > 0) {
+
+                                    {
 
                                         Date date = new Date();
 
@@ -97,7 +99,7 @@ public class VendingMachineCLI {
                                         try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
                                             NumberFormat format = NumberFormat.getCurrencyInstance();
                                             String feedMoney = format.format(moneyPutIn);
-                                            NumberFormat formatAgain = NumberFormat.getCurrencyInstance();
+                                            NumberFormat.getCurrencyInstance();
                                             String totalMoney = format.format(displayCurrent);
                                             writer.println(">" + date.getFormattedDate() + " FEED MONEY " + feedMoney + " " + totalMoney);
 
@@ -107,11 +109,11 @@ public class VendingMachineCLI {
 
                                         }
                                     }
+
                                 }
                                 break;
 
                                 case SUB_MENU_SELECT_PRODUCT: {
-//                                    boolean stayInMenu = true;
                                     System.out.println();
                                     System.out.print("Your current balance is: " + balanceMoney);
                                     System.out.println();
@@ -129,7 +131,7 @@ public class VendingMachineCLI {
                                     String choiceInput = scanner.nextLine();
                                     for (Products prod : listOfInventory) {
                                         if (choiceInput.equals(prod.getSlotNumber()) && prod.getPrice() <= displayCurrent) {
-                                            System.out.println("The product you selected is: " + prod.getName());
+                                            System.out.println("Here is your " + prod.getName() + ". Enjoy!");
                                             System.out.println(prod.boughtIt());
                                             displayCurrent = displayCurrent - prod.getPrice();
                                             prod.reduceInventory();
@@ -141,7 +143,7 @@ public class VendingMachineCLI {
                                             try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
                                                 NumberFormat format = NumberFormat.getCurrencyInstance();
                                                 String moneyBefore = format.format(displayCurrent + prod.getPrice());
-                                                NumberFormat formatFormat = NumberFormat.getCurrencyInstance();
+                                                NumberFormat.getCurrencyInstance();
                                                 String moneyAfter = format.format(displayCurrent);
                                                 writer.println(">" + date.getFormattedDate() + " " + prod.getName() + " " + prod.getSlotNumber() + " " + moneyBefore + " " + moneyAfter);
 
@@ -167,8 +169,8 @@ public class VendingMachineCLI {
                                         try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
                                             NumberFormat format = NumberFormat.getCurrencyInstance();
                                             String changeDue = format.format(displayCurrent);
-                                            NumberFormat formatFormat = NumberFormat.getCurrencyInstance();
-                                            String noneLeft = format.format(displayCurrent - displayCurrent);
+                                            NumberFormat.getCurrencyInstance();
+                                            String noneLeft = format.format(0.0);
                                             writer.println(">" + date.getFormattedDate() + " " + "GIVE CHANGE" + " " + changeDue + " " + noneLeft);
 
                                         } catch (FileNotFoundException e) {

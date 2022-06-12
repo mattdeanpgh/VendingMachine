@@ -32,6 +32,7 @@ public class Menu {
 			if (selectedOption > 0 && selectedOption <= options.length) {
 				choice = options[selectedOption - 1];
 			}
+
 		} catch (NumberFormatException e) {
 			// eat the exception, an error message will be displayed below since choice will be null
 		}
