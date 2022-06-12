@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Date {
     private String formattedDate;
 
+    public Date() {
+
+    }
+
 
     public Date(String formattedDate) {
         this.formattedDate = formattedDate;

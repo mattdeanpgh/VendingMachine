@@ -3,6 +3,7 @@ package com.techelevator;
 import com.techelevator.products.Products;
 
 import java.io.*;
+import java.text.NumberFormat;
 import java.util.*;
 
 
@@ -60,19 +61,23 @@ public class Money {
             int nickelCounter = 0;
             int quartersFromTruncation = (int) (currentMoney / .25);
             int dimesFromTruncation = (int) (((currentMoney * 100) - (quartersFromTruncation * 25)) / 10);
+            int nickelsFromTruncation = (int) (((currentMoney*100) - ((quartersFromTruncation*25) + (dimesFromTruncation*10))) / 5);
 
-            if (currentMoney >= .25) {
-                quarterCounter += currentMoney / .25;
-            }
-            if (currentMoney >= .10) {
-                currentMoney = currentMoney - ((quartersFromTruncation * 25) / 100);
-                dimeCounter += currentMoney / .1;
-            }
-            if (currentMoney >= .05) {
-                currentMoney = currentMoney - ((((quartersFromTruncation * 25) + (dimesFromTruncation * 10)) / 100));
-                nickelCounter += currentMoney / .05;
-            }
-            System.out.println("Change due is " + currentMoney + "(" + quarterCounter + " quarters, " + dimeCounter + " dimes, " + nickelCounter + " nickels)");
+//            if (currentMoney >= .25) {
+//                quarterCounter += currentMoney / .25;
+//            }
+//            if (currentMoney >= .10) {
+//                currentMoney = currentMoney - ((quartersFromTruncation * 25) / 100);
+//                dimeCounter += currentMoney / .1;
+//            }
+//            if (currentMoney >= .05) {
+//                currentMoney = currentMoney - ((((quartersFromTruncation * 25) + (dimesFromTruncation * 10)) / 100));
+//                nickelCounter += currentMoney / .05;
+//            }
+
+            NumberFormat format = NumberFormat.getCurrencyInstance();
+            String moneyString = format.format(currentMoney);
+            System.out.println("Change due is " + moneyString + "(" + quartersFromTruncation + " quarters, " + dimesFromTruncation + " dimes, " + nickelsFromTruncation + " nickels)");
         }
     }
 

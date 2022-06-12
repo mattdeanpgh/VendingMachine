@@ -36,6 +36,7 @@ public class VendingMachineCLI {
             String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
             Money current = new Money();
             double displayCurrent = current.getCurrentMoney();
+            int currentInventory = 5;
 
             switch (choice) {
                 case MAIN_MENU_OPTION_DISPLAY_ITEMS:
@@ -49,7 +50,6 @@ public class VendingMachineCLI {
                             String moneyString = formatter.format(prod.getPrice());
                             System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | " + prod.getInventoryCount() + " remaining.");
 
-//                                menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
 
 
@@ -66,7 +66,6 @@ public class VendingMachineCLI {
 
                     try {
                         File log = new File("Log.txt");
-                        Date dateFormatted = new Date();
 
 
                         boolean x = true;
@@ -94,17 +93,19 @@ public class VendingMachineCLI {
 
                                     if (moneyPutIn > 0) {
 
+                                        Date date = new Date();
+
 
                                         try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
-                                            writer.println("Date " + "Time" + " FEED MONEY " + moneyPutIn + " " + displayCurrent);
+                                            NumberFormat format = NumberFormat.getCurrencyInstance();
+                                            String feedMoney = format.format(moneyPutIn);
+                                            NumberFormat formatAgain = NumberFormat.getCurrencyInstance();
+                                            String totalMoney = format.format(displayCurrent);
+                                            writer.println(">" + date.getFormattedDate() + " FEED MONEY " + feedMoney + " " + totalMoney);
 
 
                                         } catch (FileNotFoundException e) {
                                             System.out.println("File Not Found");
-
-//                                    System.out.println("Your current balance is " + displayCurrent);
-
-//                                    menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
 
                                         }
                                     }
@@ -129,55 +130,59 @@ public class VendingMachineCLI {
                                     System.out.print("Please enter the product code: ");
                                     String choiceInput = scanner.nextLine();
                                     for (Products prod : listOfInventory) {
-                                    if (choiceInput.equals(prod.getSlotNumber())) {
-                                        System.out.println("The product you selected is: " + prod.getName() );
+                                        if (choiceInput.equals(prod.getSlotNumber()) && prod.getPrice() <= displayCurrent) {
+                                            System.out.println("The product you selected is: " + prod.getName());
+                                            System.out.println(prod.boughtIt());
+                                            displayCurrent = displayCurrent - prod.getPrice();
+                                            prod.reduceInventory();
+                                            System.out.println("There are " + prod.getInventoryCount() + " left.");
+
+                                            Date date = new Date();
+
+
+                                            try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
+                                                NumberFormat format = NumberFormat.getCurrencyInstance();
+                                                String moneyBefore = format.format(displayCurrent + prod.getPrice());
+                                                NumberFormat formatFormat = NumberFormat.getCurrencyInstance();
+                                                String moneyAfter = format.format(displayCurrent);
+                                                writer.println(">" + date.getFormattedDate() + " " + prod.getName() + " " + prod.getSlotNumber() + " " + moneyBefore + " " + moneyAfter);
+
+
+                                            } catch (FileNotFoundException e) {
+                                                System.out.println("File Not Found");
+
+
+                                            }
+                                        }
                                     }
-//                                        String productPrice = format.format(prod.getPrice());
-//                                        String productChoice = prod.getSlotNumber().toUpperCase().contains(choiceInput.toUpperCase();
-//                                        Double productCost = Double.parseDouble(choiceInput);
-////                                        if (prod.getSlotNumber().toUpperCase().contains(choiceInput.toUpperCase()))
-//                                                double priceOfProduct = Double.parseDouble(choiceInput).getPrice();
-//                                            balanceMoney = balanceMoney -priceOfProduct;
-                                        
-                                       
-//                                            balanceMoney = current.getFeedMoney() - prod.getPrice();
-//                                        displayCurrent =
-//
-//                                        if (prod.getProductType().equals("Chip")) ;
-//                                        System.out.println(Chips.bought);
-//                                        if (prod.getProductType().equals("Drink")) ;
-//                                        System.out.println("Glug Glug, Yum!" + " Enjoy!");
-//                                        if (prod.getProductType().equals("Candy")) ;
-//                                        System.out.println(prod.getProductType().equals("Candy"));
-//                                        System.out.println("Munch Munch, Yum!" + " Enjoy!");
-                                    }
-//                                    while (stayInMenu) {
-//                                        String userInput = scanner.nextLine();
-//                                        double moneySpent =
-//                                    }
                                 }
-//                                        stayInMenu = false; I think the boolean statement at the top of the try block will apply to all of these menus so this probably isn't needed
-//                                menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
                                 break;
 
-
                                 case SUB_MENU_FINISH_TRANSACTION: {
 
-                                    //Write transaction to file
+                                    Money change = new Money(displayCurrent, currentInventory);
+
+                                    change.makePurchaseReturnChange();
+                                    {
+                                        Date date = new Date();
+                                        try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
+                                            NumberFormat format = NumberFormat.getCurrencyInstance();
+                                            String changeDue = format.format(displayCurrent);
+                                            NumberFormat formatFormat = NumberFormat.getCurrencyInstance();
+                                            String noneLeft = format.format(displayCurrent - displayCurrent);
+                                            writer.println(">" + date.getFormattedDate() + " " + "GIVE CHANGE" + " " + changeDue + " " + noneLeft);
+
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("File Not Found");
+                                        }
+                                    }
                                     x = false;
                                 }
-
                             }
                         }
 
-
                         break;
-
-
-//                                default:
-//                                    throw new IllegalStateException("Unexpected value: " + purchaseChoice);
-
 
                     } catch (NullPointerException e) {
                         System.out.println("Not a Valid Choice.");
@@ -191,7 +196,3 @@ public class VendingMachineCLI {
         }
     }
 }
-
-
-//create a new instance of machine
-//having items present, you can get those items from that class

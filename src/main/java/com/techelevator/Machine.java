@@ -43,26 +43,26 @@ public class Machine {
                         String productName = productDetails[1];
                         double productCost = Double.parseDouble(productDetails[2]);
                         String productType = productDetails[3];
-                        int inventoryCount = 5;
+
 
                         if (productType.equals("Drink")) {
-                            Beverage newBeverage = new Beverage(productLocation, productName, productCost, productType, inventoryCount);
+                            Beverage newBeverage = new Beverage(productLocation, productName, productCost, productType);
                             {
                                 itemsInMachine.add(newBeverage);
                             }
                         } else if (productType.equals("Chip")) {
 
-                            Chips newChip = new Chips(productLocation, productName, productCost, productType, inventoryCount);
+                            Chips newChip = new Chips(productLocation, productName, productCost, productType);
                             {
                                 itemsInMachine.add(newChip);
                             }
                         } else if (productType.equals("Candy")) {
-                            Candy newCandy = new Candy(productLocation, productName, productCost, productType, inventoryCount);
+                            Candy newCandy = new Candy(productLocation, productName, productCost, productType);
                             {
                                 itemsInMachine.add(newCandy);
                             }
                         } else if (productType.equals("Gum")) {
-                            Gum newGum = new Gum(productLocation, productName, productCost, productType, inventoryCount);
+                            Gum newGum = new Gum(productLocation, productName, productCost, productType);
                             {
                                 newGum.setName(productName);
                                 itemsInMachine.add(newGum);
