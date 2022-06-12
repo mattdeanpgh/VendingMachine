@@ -8,10 +8,8 @@ import com.techelevator.view.Menu;
 import java.awt.*;
 import java.io.*;
 import java.text.NumberFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class VendingMachineCLI {
 
