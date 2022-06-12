@@ -27,57 +27,33 @@ public class Money {
 
     }
 
-    public void setCurrentMoney(double currentMoney) {
-        this.currentMoney = currentMoney;
-    }
-
     public double getCurrentMoney() {
         return currentMoney;
-    }
-
-    public double getWithdraw() {
-        return withdraw;
     }
 
     public double getFeedMoney() {
         return feedMoney;
     }
 
-    public void FeedMoney(double moneyInserted) {
-        if (moneyInserted <= 0 || moneyInserted >= 10) {
-            System.out.println("Invalid amount. Return to main menu.");
-        } else {
-            currentMoney = currentMoney + moneyInserted;
-
-        }
-    }
-        public void withdraw ( double priceOfProduct){
-            currentMoney = currentMoney - priceOfProduct;
-        }
-
-        public void makePurchaseReturnChange () {
-            int quarterCounter = 0;
-            int dimeCounter = 0;
-            int nickelCounter = 0;
+//    public boolean moneyInsert () {
+//        boolean validInput = true;
+//        double fedMoney = 0;
+//
+//        if (fedMoney < 0 || fedMoney != 1 || fedMoney != 2 || fedMoney != 5 || fedMoney != 10 || fedMoney > 10) {
+//            validInput = false;
+//            System.out.println("Invalid amount.");
+////        } else {
+//
+//        } return
+//    }
+    public void makePurchaseReturnChange () {
             int quartersFromTruncation = (int) (currentMoney / .25);
             int dimesFromTruncation = (int) (((currentMoney * 100) - (quartersFromTruncation * 25)) / 10);
             int nickelsFromTruncation = (int) (((currentMoney*100) - ((quartersFromTruncation*25) + (dimesFromTruncation*10))) / 5);
 
-//            if (currentMoney >= .25) {
-//                quarterCounter += currentMoney / .25;
-//            }
-//            if (currentMoney >= .10) {
-//                currentMoney = currentMoney - ((quartersFromTruncation * 25) / 100);
-//                dimeCounter += currentMoney / .1;
-//            }
-//            if (currentMoney >= .05) {
-//                currentMoney = currentMoney - ((((quartersFromTruncation * 25) + (dimesFromTruncation * 10)) / 100));
-//                nickelCounter += currentMoney / .05;
-//            }
-
             NumberFormat format = NumberFormat.getCurrencyInstance();
             String moneyString = format.format(currentMoney);
-            System.out.println("Change due is " + moneyString + "(" + quartersFromTruncation + " quarters, " + dimesFromTruncation + " dimes, " + nickelsFromTruncation + " nickels)");
+            System.out.println("Change due is " + moneyString + ": " + quartersFromTruncation + " quarter(s), " + dimesFromTruncation + " dime(s), " + nickelsFromTruncation + " nickel(s)");
         }
     }
 
