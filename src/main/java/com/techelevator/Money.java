@@ -35,17 +35,19 @@ public class Money {
         return feedMoney;
     }
 
-//    public boolean moneyInsert () {
-//        boolean validInput = true;
-//        double fedMoney = 0;
-//
-//        if (fedMoney < 0 || fedMoney != 1 || fedMoney != 2 || fedMoney != 5 || fedMoney != 10 || fedMoney > 10) {
-//            validInput = false;
+    public boolean moneyInsert () {
+        boolean validInput = true;
+//        double feedMoney = 0;
+
+        if (feedMoney != 10 && feedMoney != 5 && feedMoney != 2 && feedMoney != 1) {
+            return false;
 //            System.out.println("Invalid amount.");
-////        } else {
-//
-//        } return
-//    }
+
+//        } else {
+        }
+        return true;
+    }
+
     public void makePurchaseReturnChange () {
             int quartersFromTruncation = (int) (currentMoney / .25);
             int dimesFromTruncation = (int) (((currentMoney * 100) - (quartersFromTruncation * 25)) / 10);

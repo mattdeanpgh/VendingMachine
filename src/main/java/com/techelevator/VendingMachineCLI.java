@@ -88,27 +88,33 @@ public class VendingMachineCLI {
                                     Money moneyInserted = new Money(displayCurrent, moneyPutIn);
                                     double moneyInMachine = moneyInserted.getFeedMoney();
 //                                    moneyInserted.moneyInsert();
-                                    displayCurrent += moneyInMachine;
 
-
-                                    {
-
-                                        Date date = new Date();
-
-
-                                        try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
-                                            NumberFormat format = NumberFormat.getCurrencyInstance();
-                                            String feedMoney = format.format(moneyPutIn);
-                                            NumberFormat.getCurrencyInstance();
-                                            String totalMoney = format.format(displayCurrent);
-                                            writer.println(">" + date.getFormattedDate() + " FEED MONEY " + feedMoney + " " + totalMoney);
-
-
-                                        } catch (FileNotFoundException e) {
-                                            System.out.println("File Not Found");
-
+                                        if (!moneyInserted.moneyInsert()) {
+                                            System.out.println("Invalid amount.");
                                         }
-                                    }
+                                        else {
+                                            displayCurrent += moneyInMachine;
+                                        }
+
+
+                                        {
+
+                                            Date date = new Date();
+
+
+                                            try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
+                                                NumberFormat format = NumberFormat.getCurrencyInstance();
+                                                String feedMoney = format.format(moneyPutIn);
+                                                NumberFormat.getCurrencyInstance();
+                                                String totalMoney = format.format(displayCurrent);
+                                                writer.println(">" + date.getFormattedDate() + " FEED MONEY " + feedMoney + " " + totalMoney);
+
+
+                                            } catch (FileNotFoundException e) {
+                                                System.out.println("File Not Found");
+
+                                            }
+                                        }
 
                                 }
                                 break;
