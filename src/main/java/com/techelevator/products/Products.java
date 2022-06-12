@@ -28,17 +28,14 @@ public class Products {
     }
 
     public int reduceInventory() {
-        inventoryCount -= 1;
-        return inventoryCount;
+        if (this.inventoryCount == 0) {
+            System.out.println("Item SOLD OUT. Please select another option.");
+        } return --this.inventoryCount;
 
     }
 
     public int getInventoryCount() {
         return inventoryCount;
-    }
-
-    public void setInventoryCount(int inventoryCount) {
-        this.inventoryCount = inventoryCount;
     }
 
     public String getName() {
