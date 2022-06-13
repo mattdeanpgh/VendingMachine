@@ -150,7 +150,12 @@ public class VendingMachineCLI {
                                         }
 
                                         Date date = new Date();
+                                        for (Products xyz : itemsPresent.getItemsInMachine()) {
+                                            if (prod.getName().equals(xyz.getName())) {
+                                                xyz.reduceInventory();
+                                            }
 
+                                        }
 
                                         try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
                                             NumberFormat format = NumberFormat.getCurrencyInstance();
@@ -165,12 +170,7 @@ public class VendingMachineCLI {
 
 
                                         }
-                                        for (Products xyz : itemsPresent.getItemsInMachine()) {
-                                            if (prod.getName().equals(xyz.getName())) {
-                                                xyz.reduceInventory();
-                                            }
 
-                                        }
                                     }
                                 }
 

@@ -15,14 +15,6 @@ public class Products {
         this.inventoryCount = inventoryCount;
     }
 
-    public Products(String slotNumber, String name, double price, String productType) {
-        this.slotNumber = slotNumber;
-        this.name = name;
-        this.price = price;
-        this.productType = productType;
-    }
-
-
 
     public String boughtIt() {
         return boughtIt();
@@ -50,23 +42,12 @@ return inventoryCount;
         return slotNumber;
     }
 
-    public void setSlotNumber(String slotNumber) {
-        this.slotNumber = slotNumber;
-    }
-
     public String getProductType() {
         return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }
