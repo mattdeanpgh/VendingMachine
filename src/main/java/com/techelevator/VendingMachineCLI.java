@@ -30,24 +30,27 @@ public class VendingMachineCLI {
     }
 
     public void run() {
+        Machine itemsPresent = new Machine();
+        List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
+
         while (true) {
             String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
             Money current = new Money();
             double displayCurrent = current.getCurrentMoney();
             int currentInventory = 5;
+//            Machine itemsPresent = new Machine();
+//            List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
+
 
             switch (choice) {
                 case MAIN_MENU_OPTION_DISPLAY_ITEMS:
-
                     try {
                         System.out.println();
-                        Machine itemsPresent = new Machine();
 
-                        for (Products prod : itemsPresent.getItemsInMachine()) {
+                        for (Products prod : listOfInventory) {
                             NumberFormat formatter = NumberFormat.getCurrencyInstance();
                             String moneyString = formatter.format(prod.getPrice());
                             System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType() + " | " + prod.getInventoryCount() + " remaining.");
-
                         }
 
 
@@ -123,8 +126,8 @@ public class VendingMachineCLI {
                                     System.out.print("Your current balance is: " + balanceMoney);
                                     System.out.println();
                                     System.out.println();
-                                    Machine itemsPresent = new Machine();
-                                    List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
+//                                    Machine itemsPresent = new Machine();
+//                                    List<Products> listOfInventory = new ArrayList<>(itemsPresent.getItemsInMachine());
                                     for (Products prod : listOfInventory) {
                                         NumberFormat format = NumberFormat.getCurrencyInstance();
                                         String moneyString = format.format(prod.getPrice());
@@ -135,7 +138,8 @@ public class VendingMachineCLI {
                                     System.out.print("Please enter the product code: ");
                                     String choiceInput = scanner.nextLine();
                                     for (Products prod : listOfInventory) {
-                                        if (choiceInput.equals(prod.getSlotNumber()) && prod.getPrice() <= displayCurrent) {
+
+                                        if (choiceInput.equals(prod.getSlotNumber()) && prod.getPrice() <= displayCurrent && prod.getInventoryCount() > 1) {
                                             System.out.println("Here is your " + prod.getName() + ". Enjoy!");
                                             System.out.println(prod.boughtIt());
                                             displayCurrent = displayCurrent - prod.getPrice();
@@ -146,8 +150,17 @@ public class VendingMachineCLI {
 //                                                    xyz.reduceInventory();
 //                                                    System.out.println("There are " + xyz.getInventoryCount() + " left.");
 //                                                }
-
+                                        } else if (prod.getInventoryCount() == 1) {
+                                            System.out.println("Here is your " + prod.getName() + ". Enjoy!");
+                                            System.out.println(prod.boughtIt());
+                                            displayCurrent = displayCurrent - prod.getPrice();
+                                            prod.reduceInventory();
+                                            System.out.println(prod.getName() + "is now SOLD OUT.");
+                                        } else if (prod.getInventoryCount() <= 0) {
+                                            System.out.println("Item SOLD OUT. Select Another Item.");
+                                            ;
                                         }
+
 
                                         Date date = new Date();
 
@@ -165,14 +178,14 @@ public class VendingMachineCLI {
 
 
                                         }
-                                        for (Products xyz : itemsPresent.getItemsInMachine()) {
-                                            if (prod.getName().equals(xyz.getName())) {
-                                                xyz.reduceInventory();
-                                            }
+//                                        for (Products xyz : itemsPresent.getItemsInMachine()) {
+//                                            if (prod.getName().equals(xyz.getName())) {
+//                                                xyz.reduceInventory();
+//                                            }
 
-                                        }
                                     }
                                 }
+
 
 
                                 break;
