@@ -89,32 +89,31 @@ public class VendingMachineCLI {
                                     double moneyInMachine = moneyInserted.getFeedMoney();
 //                                    moneyInserted.moneyInsert();
 
-                                        if (!moneyInserted.moneyInsert()) {
-                                            System.out.println("Invalid amount.");
+                                    if (!moneyInserted.moneyInsert()) {
+                                        System.out.println("Invalid amount.");
+                                    } else {
+                                        displayCurrent += moneyInMachine;
+                                    }
+
+
+                                    {
+
+                                        Date date = new Date();
+
+
+                                        try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
+                                            NumberFormat format = NumberFormat.getCurrencyInstance();
+                                            String feedMoney = format.format(moneyPutIn);
+                                            NumberFormat.getCurrencyInstance();
+                                            String totalMoney = format.format(displayCurrent);
+                                            writer.println(">" + date.getFormattedDate() + " FEED MONEY " + feedMoney + " " + totalMoney);
+
+
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("File Not Found");
+
                                         }
-                                        else {
-                                            displayCurrent += moneyInMachine;
-                                        }
-
-
-                                        {
-
-                                            Date date = new Date();
-
-
-                                            try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
-                                                NumberFormat format = NumberFormat.getCurrencyInstance();
-                                                String feedMoney = format.format(moneyPutIn);
-                                                NumberFormat.getCurrencyInstance();
-                                                String totalMoney = format.format(displayCurrent);
-                                                writer.println(">" + date.getFormattedDate() + " FEED MONEY " + feedMoney + " " + totalMoney);
-
-
-                                            } catch (FileNotFoundException e) {
-                                                System.out.println("File Not Found");
-
-                                            }
-                                        }
+                                    }
 
                                 }
                                 break;
@@ -142,26 +141,39 @@ public class VendingMachineCLI {
                                             displayCurrent = displayCurrent - prod.getPrice();
                                             prod.reduceInventory();
                                             System.out.println("There are " + prod.getInventoryCount() + " left.");
+//                                            for (Products xyz : itemsPresent.getItemsInMachine()) {
+//                                                if (prod.getName().equals(xyz.getName())) {
+//                                                    xyz.reduceInventory();
+//                                                    System.out.println("There are " + xyz.getInventoryCount() + " left.");
+//                                                }
 
-                                            Date date = new Date();
+                                        }
 
-
-                                            try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
-                                                NumberFormat format = NumberFormat.getCurrencyInstance();
-                                                String moneyBefore = format.format(displayCurrent + prod.getPrice());
-                                                NumberFormat.getCurrencyInstance();
-                                                String moneyAfter = format.format(displayCurrent);
-                                                writer.println(">" + date.getFormattedDate() + " " + prod.getName() + " " + prod.getSlotNumber() + " " + moneyBefore + " " + moneyAfter);
-
-
-                                            } catch (FileNotFoundException e) {
-                                                System.out.println("File Not Found");
+                                        Date date = new Date();
 
 
+                                        try (PrintWriter writer = new PrintWriter(new FileOutputStream(log, true))) {
+                                            NumberFormat format = NumberFormat.getCurrencyInstance();
+                                            String moneyBefore = format.format(displayCurrent + prod.getPrice());
+                                            NumberFormat.getCurrencyInstance();
+                                            String moneyAfter = format.format(displayCurrent);
+                                            writer.println(">" + date.getFormattedDate() + " " + prod.getName() + " " + prod.getSlotNumber() + " " + moneyBefore + " " + moneyAfter);
+
+
+                                        } catch (FileNotFoundException e) {
+                                            System.out.println("File Not Found");
+
+
+                                        }
+                                        for (Products xyz : itemsPresent.getItemsInMachine()) {
+                                            if (prod.getName().equals(xyz.getName())) {
+                                                xyz.reduceInventory();
                                             }
+
                                         }
                                     }
                                 }
+
 
                                 break;
 
