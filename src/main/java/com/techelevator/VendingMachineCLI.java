@@ -139,7 +139,7 @@ public class VendingMachineCLI {
                                     String choiceInput = scanner.nextLine();
                                     for (Products prod : listOfInventory) {
 
-                                        if (choiceInput.equals(prod.getSlotNumber()) && prod.getPrice() <= displayCurrent && prod.getInventoryCount() > 1) {
+                                        if (choiceInput.toUpperCase().equals(prod.getSlotNumber()) && prod.getPrice() <= displayCurrent && prod.getInventoryCount() > 1) {
                                             System.out.println("Here is your " + prod.getName() + ". Enjoy!");
                                             System.out.println(prod.boughtIt());
                                             displayCurrent = displayCurrent - prod.getPrice();
