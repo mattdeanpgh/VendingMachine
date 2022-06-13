@@ -23,6 +23,7 @@ public class Products {
     }
 
 
+
     public String boughtIt() {
         return boughtIt();
     }
@@ -31,6 +32,7 @@ public class Products {
         if (this.inventoryCount == 0) {
             System.out.println("Item SOLD OUT. Please select another option.");
         } return --this.inventoryCount;
+
 
     }
 
