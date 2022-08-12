@@ -9,12 +9,4 @@ public class Chips extends Products{
 
     }
 
-
-//
-//    @Override
-//    public int getInventoryCount() {
-//        return inventoryCount;
-//    }
-//
-//    public int inventoryCount = 5;
 }

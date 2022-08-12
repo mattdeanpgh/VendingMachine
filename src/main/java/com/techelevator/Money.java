@@ -41,9 +41,7 @@ public class Money {
 
         if (feedMoney != 10 && feedMoney != 5 && feedMoney != 2 && feedMoney != 1) {
             return false;
-//            System.out.println("Invalid amount.");
 
-//        } else {
         }
         return true;
     }
@@ -62,8 +60,3 @@ public class Money {
 
 
 
-
-
-
-//inventory reduction: inventory count needs to go down by 1 each time that item is purchased
-//if item inventory == 0 sout "SOLD OUT" and return to previous menu

@@ -22,12 +22,6 @@ public class Machine {
 
 
     public List<Products> getItemsInMachine() {
-//        return itemsInMachine;
-//    }
-//
-//
-//    public List<Products> itemsInMachine () {
-////        this.itemsInMachine = itemsInMachine;
 
     File inventory = new File("vendingmachine.csv");
 
@@ -80,13 +74,6 @@ public class Machine {
 
         return itemsInMachine;
 
-//        for (Products prod : itemsInMachine) {
-//            NumberFormat formatter = NumberFormat.getCurrencyInstance();
-//            String moneyString = formatter.format(prod.getPrice());
-//            System.out.println(prod.getSlotNumber() + " | " + prod.getName() + " | " + moneyString + " | " + prod.getProductType());
-        //need to have quantity remaining
-
-//
     }
 }
 
